@@ -701,12 +701,44 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .menu__tabs::-webkit-scrollbar { display: none; }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .menu__tabs {
     flex-wrap: wrap;
     justify-content: center;
     overflow-x: visible;
+    padding-bottom: 0;
   }
+}
+
+/* Show More button */
+.menu__show-more {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.9rem 2rem;
+  margin-top: 1rem;
+  background: var(--clr-surface2);
+  border: 1px solid var(--clr-border);
+  border-radius: 100px;
+  color: var(--clr-text-dim);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-body);
+}
+.menu__show-more:hover {
+  border-color: var(--clr-gold);
+  color: var(--clr-gold);
+}
+.menu__show-more svg {
+  transition: transform 0.3s ease;
+}
+.menu__show-more.expanded svg {
+  transform: rotate(180deg);
 }
 
 .menu__tab {

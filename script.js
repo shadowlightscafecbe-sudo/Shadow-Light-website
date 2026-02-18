@@ -168,6 +168,24 @@ const MENU_ITEMS = [
 ];
 
 /* ===== RENDER MENU ===== */
+const ITEMS_PER_PAGE = 6;
+
+function buildCard(item) {
+  const badge = item.badge
+    ? `<span class="menu-card__badge badge--${item.badge}">${item.badge === 'first' ? '🏆 CBE First' : item.badge === 'new' ? '✨ New' : '🔥 Popular'}</span>`
+    : '';
+  return `
+    <article class="menu-card reveal" aria-label="${item.name}">
+      <div class="menu-card__emoji" aria-hidden="true">${item.emoji}</div>
+      <div class="menu-card__info">
+        <div class="menu-card__name">${item.name}${badge}</div>
+        <div class="menu-card__desc">${item.desc}</div>
+      </div>
+      <div class="menu-card__price">${item.price}</div>
+    </article>
+  `;
+}
+
 function renderMenu(filter = 'all') {
   const grid = document.getElementById('menuGrid');
   if (!grid) return;
@@ -176,28 +194,42 @@ function renderMenu(filter = 'all') {
     ? MENU_ITEMS
     : MENU_ITEMS.filter(item => item.cat === filter);
 
-  grid.innerHTML = items.map(item => {
-    const badge = item.badge
-      ? `<span class="menu-card__badge badge--${item.badge}">${item.badge === 'first' ? '🏆 CBE First' : item.badge === 'new' ? '✨ New' : '🔥 Popular'}</span>`
-      : '';
-    return `
-      <article class="menu-card reveal" aria-label="${item.name}">
-        <div class="menu-card__emoji" aria-hidden="true">${item.emoji}</div>
-        <div class="menu-card__info">
-          <div class="menu-card__name">${item.name}${badge}</div>
-          <div class="menu-card__desc">${item.desc}</div>
-        </div>
-        <div class="menu-card__price">${item.price}</div>
-      </article>
-    `;
-  }).join('');
+  let expanded = false;
 
-  // Trigger reveal animation for newly injected cards
-  requestAnimationFrame(() => {
-    grid.querySelectorAll('.reveal').forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), i * 60);
+  function paint() {
+    const visible = expanded ? items : items.slice(0, ITEMS_PER_PAGE);
+    const cards   = visible.map(buildCard).join('');
+
+    const showMoreBtn = items.length > ITEMS_PER_PAGE ? `
+      <button class="menu__show-more ${expanded ? 'expanded' : ''}" id="showMoreBtn" aria-expanded="${expanded}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        ${expanded
+          ? `Show Less`
+          : `Show All ${items.length} Items`}
+      </button>
+    ` : '';
+
+    grid.innerHTML = cards + showMoreBtn;
+
+    // Animate cards
+    requestAnimationFrame(() => {
+      grid.querySelectorAll('.menu-card.reveal').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 50);
+      });
     });
-  });
+
+    // Wire up button
+    const btn = document.getElementById('showMoreBtn');
+    btn?.addEventListener('click', () => {
+      expanded = !expanded;
+      paint();
+      if (!expanded) {
+        document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
+  paint();
 }
 
 /* ===== MENU TABS ===== */
@@ -308,7 +340,6 @@ function initMenuSearch() {
 
   let currentCat = 'all';
 
-  // Store current category so search respects it
   document.querySelectorAll('.menu__tab').forEach(tab => {
     tab.addEventListener('click', () => { currentCat = tab.dataset.cat; input.value = ''; });
   });
@@ -331,21 +362,13 @@ function initMenuSearch() {
       return;
     }
 
-    grid.innerHTML = results.map(item => {
-      const badge = item.badge
-        ? `<span class="menu-card__badge badge--${item.badge}">${item.badge === 'first' ? '🏆 CBE First' : item.badge === 'new' ? '✨ New' : '🔥 Popular'}</span>`
-        : '';
-      return `
-        <article class="menu-card reveal visible" aria-label="${item.name}">
-          <div class="menu-card__emoji" aria-hidden="true">${item.emoji}</div>
-          <div class="menu-card__info">
-            <div class="menu-card__name">${item.name}${badge}</div>
-            <div class="menu-card__desc">${item.desc}</div>
-          </div>
-          <div class="menu-card__price">${item.price}</div>
-        </article>
-      `;
-    }).join('');
+    // Show ALL search results (no pagination during search)
+    grid.innerHTML = results.map(item => buildCard(item)).join('');
+    requestAnimationFrame(() => {
+      grid.querySelectorAll('.menu-card.reveal').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 40);
+      });
+    });
   });
 }
 
