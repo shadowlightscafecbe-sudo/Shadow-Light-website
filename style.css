@@ -571,6 +571,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 
 /* ===== FIRSTS ===== */
 
+
 .firsts__grid {
   display: grid;
   gap: 1.5rem;
