@@ -338,7 +338,7 @@ function initMenuSearch() {
   const input = document.getElementById('menuSearch');
   if (!input) return;
 
-  let currentCat = 'all';
+  let currentCat = 'signatures';
 
   document.querySelectorAll('.menu__tab').forEach(tab => {
     tab.addEventListener('click', () => { currentCat = tab.dataset.cat; input.value = ''; });
@@ -375,7 +375,7 @@ function initMenuSearch() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
-  renderMenu('all');
+  renderMenu('signatures');
   initMenuTabs();
   initMenuSearch();
   initParticles();
