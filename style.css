@@ -1336,6 +1336,17 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   border-radius: 4px;
 }
 
+/* ===== RESPONSIVE UTILITY CLASSES ===== */
+.mobile-only { display: inline-flex; }
+@media (min-width: 1024px) {
+  .mobile-only { display: none !important; }
+}
+
+.desktop-only { display: none; }
+@media (min-width: 1024px) {
+  .desktop-only { display: inline-flex !important; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
