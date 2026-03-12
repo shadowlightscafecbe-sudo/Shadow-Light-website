@@ -1,214 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow" />
-  <title>Spin & Win | Shadow Lights Cafe</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600;800&display=swap" rel="stylesheet" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Spin & Win · Shadow Lights Cafe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:       #0a0810;
+  --surface:  #13101c;
+  --surface2: #1c1728;
+  --border:   rgba(245,200,66,0.15);
+  --gold:     #f5c842;
+  --gold2:    #e0a820;
+  --amber:    #ff9a3c;
+  --text:     #f2ead6;
+  --muted:    #7a6e60;
+  --dim:      #a0917f;
+  --font-h:   'Playfair Display', Georgia, serif;
+  --font-b:   'DM Sans', system-ui, sans-serif;
+  --ease:     cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--font-b);min-height:100dvh;
+  overflow-x:hidden;
+  display:flex;flex-direction:column;align-items:center;
+}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font:inherit}
 
-  <style>
-    :root {
-      --clr-bg:         #0d0b10;
-      --clr-surface:    #16121e;
-      --clr-surface2:   #1f1828;
-      --clr-border:     rgba(255,220,130,0.12);
-      --clr-gold:       #f5c842;
-      --clr-gold-dim:   #c9982a;
-      --clr-amber:      #ff9a3c;
-      --clr-text:       #f0ead8;
-      --clr-text-dim:   #9e8f7a;
-      --clr-text-muted: #5c5248;
-      --font-display:   'Playfair Display', Georgia, serif;
-      --font-body:      'DM Sans', -apple-system, sans-serif;
-      --radius-md: 16px; --radius-lg: 24px; --radius-xl: 40px;
-      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
-    }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{font-size:16px;scroll-behavior:smooth}
-    body{background:var(--clr-bg);color:var(--clr-text);font-family:var(--font-body);min-height:100dvh;overflow-x:hidden;display:flex;flex-direction:column;align-items:center}
-    a{color:inherit;text-decoration:none}
-    button{cursor:pointer;border:none;background:none;font:inherit}
+/* ── AMBIENT BACKGROUND ─────────────────────────── */
+.ambient{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% -10%, rgba(245,200,66,.07) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 30% at 90% 80%, rgba(212,98,26,.06) 0%, transparent 100%),
+    radial-gradient(ellipse 30% 25% at 10% 70%, rgba(155,109,255,.04) 0%, transparent 100%);
+}
 
-    /* BG GLOW */
-    .bg-glow{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-    .bg-glow::before{content:'';position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(245,200,66,.09) 0%,transparent 70%)}
-    .bg-glow::after{content:'';position:absolute;bottom:10%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(212,98,26,.07) 0%,transparent 70%)}
+/* ── PAGE WRAPPER ────────────────────────────────── */
+.page{
+  position:relative;z-index:1;
+  width:100%;max-width:440px;
+  padding:2rem 1.25rem 4rem;
+  display:flex;flex-direction:column;align-items:center;gap:2rem;
+}
 
-    /* PAGE */
-    .page{position:relative;z-index:1;width:100%;max-width:480px;padding:1.5rem 1.25rem 3rem;display:flex;flex-direction:column;align-items:center;gap:1.5rem}
+/* ── LOGO ────────────────────────────────────────── */
+.logo{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.5rem 1.25rem;
+  background:rgba(245,200,66,.06);
+  border:1px solid rgba(245,200,66,.15);
+  border-radius:100px;
+  transition:.3s var(--ease);
+}
+.logo:hover{background:rgba(245,200,66,.1)}
+.logo-moon{font-size:1.2rem;line-height:1;filter:drop-shadow(0 0 6px rgba(245,200,66,.5))}
+.logo-name{font-family:var(--font-h);font-size:.9rem;color:var(--gold);letter-spacing:.02em}
 
-    /* HEADER */
-    .header{text-align:center;padding-top:.5rem}
-    .logo{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.25rem}
-    .logo-icon{font-size:1.6rem;filter:drop-shadow(0 0 8px rgba(245,200,66,.5))}
-    .logo-text{font-family:var(--font-display);font-size:1.1rem;color:var(--clr-gold)}
-    .header__eyebrow{font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--clr-gold);margin-bottom:.5rem}
-    .header__title{font-family:var(--font-display);font-size:clamp(1.6rem,6vw,2.2rem);font-weight:700;line-height:1.2;color:var(--clr-text);margin-bottom:.5rem}
-    .header__sub{color:var(--clr-text-dim);font-size:.95rem}
-    .header__sub strong{color:var(--clr-gold);font-weight:600}
+/* ── HEADER ──────────────────────────────────────── */
+.header{text-align:center;display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.header-badge{
+  font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);background:rgba(245,200,66,.08);
+  border:1px solid rgba(245,200,66,.18);
+  border-radius:100px;padding:.3rem .9rem;
+}
+.header-title{
+  font-family:var(--font-h);
+  font-size:clamp(2rem,7vw,2.6rem);
+  font-weight:900;line-height:1.1;color:var(--text);
+}
+.header-title em{color:var(--gold);font-style:normal}
+.header-sub{font-size:.9rem;color:var(--dim);line-height:1.5}
+.header-sub b{color:var(--text);font-weight:600}
 
-    /* WHEEL SECTION */
-    .wheel-section{width:100%;display:flex;flex-direction:column;align-items:center;gap:1.5rem}
-    .wheel-wrap{position:relative;display:flex;align-items:center;justify-content:center;padding-top:20px}
+/* ── ALREADY SPUN ────────────────────────────────── */
+.banner{
+  display:none;width:100%;
+  background:rgba(245,200,66,.07);
+  border:1px solid rgba(245,200,66,.2);
+  border-radius:14px;padding:.85rem 1.1rem;
+  font-size:.85rem;color:var(--gold);text-align:center;
+  line-height:1.5;
+}
+.banner.show{display:block}
 
-    .wheel-pointer{
-      position:absolute;top:0;left:50%;transform:translateX(-50%);
-      z-index:10;width:0;height:0;
-      border-left:15px solid transparent;
-      border-right:15px solid transparent;
-      border-top:32px solid var(--clr-gold);
-      filter:drop-shadow(0 3px 10px rgba(245,200,66,.7))
-    }
+/* ── WHEEL AREA ──────────────────────────────────── */
+.wheel-area{
+  width:100%;display:flex;
+  flex-direction:column;align-items:center;gap:1.75rem;
+}
 
-    .wheel-ring{
-      padding:5px;border-radius:50%;
-      background:conic-gradient(from 0deg,var(--clr-gold),var(--clr-gold-dim),var(--clr-gold),var(--clr-gold-dim),var(--clr-gold));
-      box-shadow:0 0 40px rgba(245,200,66,.3),0 0 80px rgba(245,200,66,.1)
-    }
-    #wheelCanvas{display:block;border-radius:50%}
-    .wheel-hub{
-      position:absolute;width:50px;height:50px;border-radius:50%;
-      background:radial-gradient(circle at 35% 35%,#fffbe0,var(--clr-gold));
-      box-shadow:0 0 20px rgba(245,200,66,.6),inset 0 2px 4px rgba(255,255,255,.4);
-      z-index:5
-    }
+/* Outer glow ring */
+.wheel-outer{
+  position:relative;
+  padding:8px;border-radius:50%;
+  background:conic-gradient(
+    from 0deg,
+    #f5c842 0deg, #e0a820 72deg,
+    #f5c842 144deg, #e0a820 216deg,
+    #f5c842 288deg, #e0a820 360deg
+  );
+  box-shadow:
+    0 0 0 1px rgba(245,200,66,.1),
+    0 0 40px rgba(245,200,66,.2),
+    0 0 80px rgba(245,200,66,.08),
+    inset 0 0 20px rgba(0,0,0,.3);
+}
 
-    /* SPIN BUTTON */
-    .spin-btn{
-      position:relative;overflow:hidden;
-      padding:1rem 2rem;border-radius:var(--radius-xl);
-      font-family:var(--font-display);font-size:1.2rem;font-weight:700;
-      letter-spacing:.06em;color:#1a1200;
-      background:linear-gradient(135deg,var(--clr-gold) 0%,var(--clr-amber) 100%);
-      box-shadow:0 4px 28px rgba(245,200,66,.45);
-      transition:var(--transition);
-      animation:pulse-btn 2s ease-in-out infinite;
-      width:100%
-    }
-    .spin-btn::before{content:'';position:absolute;top:-50%;left:-60%;width:40%;height:200%;background:rgba(255,255,255,.3);transform:skewX(-20deg);transition:left .5s}
-    .spin-btn:hover::before{left:120%}
-    .spin-btn:hover:not(:disabled){transform:translateY(-2px) scale(1.02);box-shadow:0 8px 36px rgba(245,200,66,.55)}
-    .spin-btn:disabled{opacity:.45;cursor:not-allowed;animation:none;transform:none}
+/* Animated shimmer on the ring */
+.wheel-outer::after{
+  content:'';position:absolute;inset:-2px;border-radius:50%;
+  background:conic-gradient(
+    from var(--r,0deg),
+    transparent 0deg,rgba(255,255,255,.15) 30deg,transparent 60deg,
+    transparent 180deg,rgba(255,255,255,.1) 210deg,transparent 240deg
+  );
+  animation:ring-spin 4s linear infinite;
+}
+@property --r{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes ring-spin{to{--r:360deg}}
 
-    @keyframes pulse-btn{
-      0%,100%{box-shadow:0 4px 28px rgba(245,200,66,.45),0 0 0 0 rgba(245,200,66,.3)}
-      50%{box-shadow:0 4px 28px rgba(245,200,66,.45),0 0 0 14px rgba(245,200,66,0)}
-    }
+.wheel-inner{border-radius:50%;overflow:hidden;position:relative;z-index:1}
+#wheelCanvas{display:block}
 
-    .odds-hint{font-size:.77rem;color:var(--clr-text-muted);text-align:center;letter-spacing:.03em}
+/* Pointer — sits above the ring */
+.pointer{
+  position:absolute;
+  top:-2px;left:50%;transform:translateX(-50%);
+  z-index:20;
+  width:0;height:0;
+  border-left:16px solid transparent;
+  border-right:16px solid transparent;
+  border-top:36px solid var(--gold);
+  filter:drop-shadow(0 4px 12px rgba(245,200,66,.8));
+}
 
-    /* ALREADY SPUN */
-    .already-banner{display:none;background:rgba(245,200,66,.07);border:1px solid rgba(245,200,66,.2);border-radius:var(--radius-md);padding:.75rem 1rem;font-size:.85rem;color:var(--clr-gold);text-align:center;width:100%}
-    .already-banner.visible{display:block}
+/* Centre hub */
+.hub{
+  position:absolute;
+  width:54px;height:54px;border-radius:50%;
+  background:
+    radial-gradient(circle at 32% 28%, #fff9e0 0%, #f5c842 45%, #c9982a 100%);
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,.4),
+    0 0 20px rgba(245,200,66,.5),
+    inset 0 2px 3px rgba(255,255,255,.4);
+  z-index:10;
+}
 
-    /* PRIZE SCREEN */
-    #prizeScreen{display:none;width:100%;flex-direction:column;align-items:center;gap:1.25rem;animation:fadeUp .5s ease both}
-    #prizeScreen.visible{display:flex}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+/* ── SPIN BUTTON ─────────────────────────────────── */
+.spin-wrap{width:100%;display:flex;flex-direction:column;align-items:center;gap:.9rem}
 
-    .prize-card{
-      width:100%;background:var(--clr-surface);border:1px solid var(--clr-border);
-      border-radius:var(--radius-lg);padding:2rem 1.5rem;text-align:center;
-      position:relative;overflow:hidden;
-      box-shadow:0 8px 40px rgba(0,0,0,.5),0 0 60px rgba(245,200,66,.08)
-    }
-    .prize-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(245,200,66,.07) 0%,transparent 60%);pointer-events:none}
+.spin-btn{
+  width:100%;max-width:320px;
+  position:relative;overflow:hidden;
+  padding:1.1rem 2rem;border-radius:100px;
+  font-family:var(--font-h);font-size:1.25rem;font-weight:700;
+  letter-spacing:.04em;color:#160f00;
+  background:linear-gradient(135deg,#f9d55a 0%,#f5c842 40%,#e8a520 100%);
+  box-shadow:
+    0 2px 0 #a87010,
+    0 6px 32px rgba(245,200,66,.45),
+    0 0 60px rgba(245,200,66,.15);
+  transition:.25s var(--ease);
+  animation:btn-breathe 2.5s ease-in-out infinite;
+}
+/* Shine sweep */
+.spin-btn::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:skewX(-20deg);transition:left .6s;
+}
+.spin-btn:hover::before{left:150%}
+.spin-btn:hover:not(:disabled){
+  transform:translateY(-3px);
+  box-shadow:0 2px 0 #a87010,0 10px 40px rgba(245,200,66,.55),0 0 80px rgba(245,200,66,.2);
+}
+.spin-btn:active:not(:disabled){transform:translateY(0);box-shadow:0 1px 0 #a87010,0 4px 20px rgba(245,200,66,.4)}
+.spin-btn:disabled{
+  opacity:.4;cursor:not-allowed;
+  animation:none;transform:none;
+  box-shadow:none;
+}
+@keyframes btn-breathe{
+  0%,100%{box-shadow:0 2px 0 #a87010,0 6px 32px rgba(245,200,66,.45),0 0 0 0 rgba(245,200,66,.25)}
+  50%{box-shadow:0 2px 0 #a87010,0 6px 32px rgba(245,200,66,.45),0 0 0 16px rgba(245,200,66,0)}
+}
 
-    .prize-you-won{font-size:.78rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--clr-gold);margin-bottom:.5rem}
-    .prize-name{font-family:var(--font-display);font-size:clamp(1.6rem,6vw,2.2rem);font-weight:700;color:var(--clr-text);line-height:1.15;margin-bottom:.4rem}
-    .prize-desc{color:var(--clr-text-dim);font-size:.92rem;margin-bottom:.6rem}
+.spin-hint{font-size:.75rem;color:var(--muted);letter-spacing:.04em;text-align:center}
 
-    .prize-min-order{
-      display:inline-flex;align-items:center;gap:.35rem;
-      background:rgba(255,154,60,.1);border:1px solid rgba(255,154,60,.3);
-      border-radius:100px;padding:.3rem .9rem;
-      font-size:.8rem;font-weight:600;color:var(--clr-amber);
-      margin-bottom:1.25rem
-    }
+/* ── PRIZE SCREEN ────────────────────────────────── */
+#prizeScreen{
+  display:none;width:100%;
+  flex-direction:column;align-items:center;gap:1.25rem;
+}
+#prizeScreen.show{
+  display:flex;
+  animation:rise .55s var(--ease) both;
+}
+@keyframes rise{
+  from{opacity:0;transform:translateY(28px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
-    .prize-validity{
-      display:inline-flex;align-items:center;gap:.4rem;
-      background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.2);
-      border-radius:var(--radius-xl);padding:.45rem 1rem;
-      font-size:.88rem;color:var(--clr-gold);font-weight:500;margin-bottom:1.5rem
-    }
-    .prize-screenshot-hint{background:var(--clr-surface2);border-radius:var(--radius-md);padding:.9rem 1rem;font-size:.85rem;color:var(--clr-text-dim);line-height:1.5;margin-bottom:1rem}
-    .prize-screenshot-hint strong{color:var(--clr-text);display:block;margin-bottom:.2rem}
-    .prize-location{font-size:.82rem;color:var(--clr-text-muted);line-height:1.6}
-    .prize-location span{display:block}
+/* Big winner card */
+.prize-card{
+  width:100%;position:relative;overflow:hidden;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:2.25rem 1.75rem 2rem;
+  text-align:center;
+}
+/* Top gold gradient sweep */
+.prize-card::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),transparent);
+}
+.prize-card::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 50% at 50% -10%,rgba(245,200,66,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
 
-    /* ACTION BUTTONS */
-    .prize-actions{width:100%;display:flex;flex-direction:column;gap:.75rem}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:var(--radius-xl);font-size:.92rem;font-weight:600;transition:var(--transition);width:100%}
-    .btn--directions{background:var(--clr-surface);border:1.5px solid var(--clr-border);color:var(--clr-text)}
-    .btn--directions:hover{border-color:var(--clr-gold);color:var(--clr-gold);transform:translateY(-1px)}
-    .btn--whatsapp{background:rgba(37,211,102,.1);border:1.5px solid rgba(37,211,102,.3);color:#25D366}
-    .btn--whatsapp:hover{background:rgba(37,211,102,.18);transform:translateY(-1px)}
+.prize-won-label{
+  font-size:.7rem;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.75rem;
+}
+.prize-emoji{font-size:3.5rem;line-height:1;margin-bottom:.75rem;display:block}
+.prize-name{
+  font-family:var(--font-h);
+  font-size:clamp(1.7rem,6vw,2.3rem);
+  font-weight:900;line-height:1.1;
+  color:var(--text);margin-bottom:.4rem;
+}
+.prize-desc{color:var(--dim);font-size:.95rem;margin-bottom:1.25rem;line-height:1.5}
 
-    /* CONFETTI */
-    #confettiCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999}
+/* Conditions row */
+.prize-conditions{
+  display:flex;flex-wrap:wrap;
+  justify-content:center;gap:.5rem;
+  margin-bottom:1.5rem;
+}
+.cond-pill{
+  display:inline-flex;align-items:center;gap:.3rem;
+  padding:.35rem .85rem;border-radius:100px;
+  font-size:.78rem;font-weight:600;
+}
+.cond-pill--order{
+  background:rgba(255,154,60,.1);
+  border:1px solid rgba(255,154,60,.25);
+  color:var(--amber);
+}
+.cond-pill--expiry{
+  background:rgba(245,200,66,.08);
+  border:1px solid rgba(245,200,66,.2);
+  color:var(--gold);
+}
 
-    /* FOOTER */
-    .spin-footer{text-align:center;font-size:.75rem;color:var(--clr-text-muted)}
-    .spin-footer a{color:var(--clr-gold);text-decoration:underline;text-underline-offset:3px}
-  </style>
+/* Screenshot box */
+.screenshot-box{
+  background:var(--surface2);
+  border:1px dashed rgba(245,200,66,.2);
+  border-radius:14px;padding:1rem 1.25rem;
+  margin-bottom:1.25rem;
+}
+.screenshot-box strong{
+  display:block;font-size:.88rem;font-weight:700;
+  color:var(--text);margin-bottom:.25rem;
+}
+.screenshot-box p{font-size:.82rem;color:var(--dim);line-height:1.5}
+
+.prize-location{font-size:.8rem;color:var(--muted);line-height:1.7}
+.prize-location span{display:block}
+
+/* Action buttons */
+.prize-actions{width:100%;display:flex;flex-direction:column;gap:.75rem}
+
+.btn{
+  width:100%;display:flex;align-items:center;
+  justify-content:center;gap:.5rem;
+  padding:.9rem 1.5rem;border-radius:100px;
+  font-size:.92rem;font-weight:600;
+  transition:.25s var(--ease);
+}
+.btn-directions{
+  background:var(--surface);
+  border:1px solid rgba(255,255,255,.1);
+  color:var(--text);
+}
+.btn-directions:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-1px)}
+.btn-whatsapp{
+  background:rgba(37,211,102,.1);
+  border:1px solid rgba(37,211,102,.25);
+  color:#25D366;
+}
+.btn-whatsapp:hover{background:rgba(37,211,102,.18);transform:translateY(-1px)}
+
+/* Footer */
+.spin-footer{text-align:center;font-size:.75rem;color:var(--muted)}
+.spin-footer a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+
+/* Confetti */
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:999}
+</style>
 </head>
 <body>
 
-<div class="bg-glow" aria-hidden="true"></div>
-<canvas id="confettiCanvas" aria-hidden="true"></canvas>
+<div class="ambient"></div>
+<canvas id="confetti"></canvas>
 
 <div class="page">
 
+  <a href="/" class="logo">
+    <span class="logo-moon">☽</span>
+    <span class="logo-name">Shadow Lights</span>
+  </a>
+
   <header class="header">
-    <a href="/" class="logo" aria-label="Shadow Lights Cafe Home">
-      <span class="logo-icon">☽</span>
-      <span class="logo-text">Shadow Lights</span>
-    </a>
-    <p class="header__eyebrow">Exclusive Offer</p>
-    <h1 class="header__title">🎡 Spin the Wheel.<br/>Win a Secret Offer!</h1>
-    <p class="header__sub"><strong>Every spin wins something.</strong> Zero losers.</p>
+    <span class="header-badge">✦ Exclusive Offer</span>
+    <h1 class="header-title">Spin the Wheel.<br/><em>Win a Secret Offer!</em></h1>
+    <p class="header-sub"><b>Every spin wins something.</b> Zero losers.</p>
   </header>
 
-  <div class="already-banner" id="alreadyBanner">
-    🎉 You've already spun! Here's your prize — visit us to claim it.
+  <div class="banner" id="banner">
+    🎉 You've already spun! Your prize is below — visit us to claim it.
   </div>
 
-  <div class="wheel-section" id="wheelSection">
-    <div class="wheel-wrap">
-      <div class="wheel-pointer" aria-hidden="true"></div>
-      <div class="wheel-ring">
-        <canvas id="wheelCanvas" aria-label="Prize spin wheel"></canvas>
+  <!-- WHEEL -->
+  <div class="wheel-area" id="wheelArea">
+
+    <div class="wheel-outer" id="wheelOuter">
+      <div class="pointer"></div>
+      <div class="wheel-inner">
+        <canvas id="wheelCanvas"></canvas>
       </div>
-      <div class="wheel-hub" aria-hidden="true"></div>
+      <div class="hub"></div>
     </div>
-    <button class="spin-btn" id="spinBtn" aria-label="Spin the wheel now">🎡 &nbsp;SPIN NOW</button>
-    <p class="odds-hint">One spin per device &nbsp;·&nbsp; All prizes are real &nbsp;·&nbsp; Valid 2 days</p>
+
+    <div class="spin-wrap">
+      <button class="spin-btn" id="spinBtn">🎡 &thinsp;SPIN NOW</button>
+      <p class="spin-hint">One spin per device &nbsp;·&nbsp; All prizes are real &nbsp;·&nbsp; Valid 2 days</p>
+    </div>
+
   </div>
 
-  <div id="prizeScreen" role="region" aria-live="polite" aria-label="Your prize result">
+  <!-- PRIZE SCREEN -->
+  <div id="prizeScreen">
     <div class="prize-card">
-      <p class="prize-you-won">🎉 You Won!</p>
+      <p class="prize-won-label">🎉 You Won!</p>
+      <span class="prize-emoji" id="prizeEmoji"></span>
       <h2 class="prize-name" id="prizeName"></h2>
       <p class="prize-desc" id="prizeDesc"></p>
-      <div class="prize-min-order" id="prizeMinOrder"></div>
-      <div class="prize-validity">⏳ Valid till: <span id="prizeExpiry"></span></div>
-      <div class="prize-screenshot-hint">
+      <div class="prize-conditions">
+        <span class="cond-pill cond-pill--order" id="prizeMinOrder"></span>
+        <span class="cond-pill cond-pill--expiry">⏳ Valid till: <span id="prizeExpiry"></span></span>
+      </div>
+      <div class="screenshot-box">
         <strong>📸 Screenshot this screen</strong>
-        Show it at our counter to claim your prize
+        <p>Show it at our counter when you visit — our team will honour your prize on the spot.</p>
       </div>
       <p class="prize-location">
         <span>📍 Opp. Geethanjalai School, Codissa Road, Coimbatore</span>
-        <span>⏰ Open daily 11 AM – 11 PM</span>
+        <span>⏰ Open daily · 11 AM – 11 PM</span>
       </p>
     </div>
+
     <div class="prize-actions">
-      <a href="https://maps.google.com/?q=Shadow+Lights+Cafe+Coimbatore" target="_blank" rel="noopener" class="btn btn--directions">📍 Get Directions →</a>
-      <a href="#" id="whatsappShare" target="_blank" rel="noopener" class="btn btn--whatsapp">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <a href="https://maps.google.com/?q=Shadow+Lights+Cafe+Coimbatore"
+         target="_blank" rel="noopener" class="btn btn-directions">
+        📍 Get Directions →
+      </a>
+      <a href="#" id="waShare" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Share on WhatsApp
       </a>
     </div>
@@ -221,106 +397,97 @@
 </div>
 
 <script>
-// ============================================================
-//  PRIZES — minOrder: minimum order in ₹ (null = no minimum)
-// ============================================================
+// ── PRIZES ───────────────────────────────────────────────────────
 const PRIZES = [
-  { id:0, labelLines:['FREE','₹399','Combo'],  name:'FREE ₹399 Combo 🎁',        desc:'One free Combo Meal worth ₹399',        minOrder:100, color:'#E8A83E', textColor:'#2a1800' },
-  { id:1, labelLines:['FREE','Milkshake'],      name:'FREE Milkshake 🥛',          desc:'One free Milkshake with any order',     minOrder:100, color:'#C4733C', textColor:'#fff5ee' },
-  { id:2, labelLines:['FREE','Mini Pops'],      name:'FREE Mini Pops 🍡',          desc:'3 pcs free with your order',            minOrder:100, color:'#D4621A', textColor:'#fff5ee' },
-  { id:3, labelLines:['FREE','Mojito'],         name:'FREE Mojito Upgrade 🍹',     desc:'Free Mojito upgrade on any combo',      minOrder:100, color:'#F0C040', textColor:'#2a1800' },
-  { id:4, labelLines:['₹30','OFF'],             name:'₹30 OFF 🎉',                 desc:'₹30 discount on your order',            minOrder:100, color:'#FFF0D0', textColor:'#3a2800' },
+  { id:0, emoji:'🎁', wheelLines:['FREE','₹399','Combo'],  name:'FREE ₹399 Combo',       desc:'One free Combo Meal worth ₹399',       minOrder:100, seg:'#E8A83E', txt:'#2a1600' },
+  { id:1, emoji:'🥛', wheelLines:['FREE','Milkshake'],      name:'FREE Milkshake',         desc:'One free Milkshake with any order',    minOrder:100, seg:'#C4733C', txt:'#fff4ee' },
+  { id:2, emoji:'🍡', wheelLines:['FREE','Mini Pops'],      name:'FREE Mini Pops',         desc:'3 pcs free with your order',           minOrder:100, seg:'#D4621A', txt:'#fff4ee' },
+  { id:3, emoji:'🍹', wheelLines:['FREE','Mojito'],         name:'FREE Mojito Upgrade',    desc:'Free Mojito upgrade on any combo',     minOrder:100, seg:'#F0C040', txt:'#2a1600' },
+  { id:4, emoji:'🎉', wheelLines:['₹30','OFF'],             name:'₹30 OFF',                desc:'₹30 discount on your total bill',      minOrder:100, seg:'#FAE8B0', txt:'#3a2600' },
 ];
 
 function pickPrize() {
-  const r = Math.floor(Math.random() * 100) + 1;
-  if (r <= 5)       return PRIZES[0];
-  else if (r <= 15) return PRIZES[1];
-  else if (r <= 45) return PRIZES[2];
-  else if (r <= 75) return PRIZES[3];
-  else              return PRIZES[4];
+  const r = Math.floor(Math.random()*100)+1;
+  if (r<=5)        return PRIZES[0];
+  else if (r<=15)  return PRIZES[1];
+  else if (r<=45)  return PRIZES[2];
+  else if (r<=75)  return PRIZES[3];
+  else             return PRIZES[4];
 }
 
-function getExpiryString() {
+function expiryStr() {
   const d = new Date();
-  d.setDate(d.getDate() + 2);
-  return d.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+  d.setDate(d.getDate()+2);
+  return d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
 }
 
-// ============================================================
-//  CANVAS SETUP
-// ============================================================
-const canvas = document.getElementById('wheelCanvas');
-const ctx    = canvas.getContext('2d');
-const NUM    = PRIZES.length;
-const ARC    = (2 * Math.PI) / NUM;   // 72° per segment
+// ── CANVAS ───────────────────────────────────────────────────────
+const cv   = document.getElementById('wheelCanvas');
+const ctx  = cv.getContext('2d');
+const DPR  = window.devicePixelRatio||1;
+const N    = PRIZES.length;
+const ARC  = (2*Math.PI)/N;
 
-const DPR  = window.devicePixelRatio || 1;
-const SIZE = Math.min(window.innerWidth - 70, 310);
-canvas.width        = SIZE * DPR;
-canvas.height       = SIZE * DPR;
-canvas.style.width  = SIZE + 'px';
-canvas.style.height = SIZE + 'px';
-ctx.scale(DPR, DPR);
+// Size: fill the container nicely, max 360px
+const SZ = Math.min(window.innerWidth - 56, 360);
+cv.width  = SZ*DPR; cv.height = SZ*DPR;
+cv.style.width = cv.style.height = SZ+'px';
+ctx.scale(DPR,DPR);
 
-const CX = SIZE / 2;
-const CY = SIZE / 2;
-const R  = SIZE / 2 - 2;
+const CX=SZ/2, CY=SZ/2, R=SZ/2-1;
 
-// ============================================================
-//  DRAW WHEEL
-//  rotation = angle of segment-0's START edge from 3-o'clock.
-//  We start at -PI/2 so segment-0's start is at the top (12 o'clock).
-// ============================================================
-function drawWheel(rotation) {
-  ctx.clearRect(0, 0, SIZE, SIZE);
+// Font sizes scale with wheel
+const FS_BIG  = Math.round(SZ * 0.075);  // ~27px on 360px wheel
+const FS_SMALL= Math.round(SZ * 0.063);  // ~22px
+const LINE_H  = FS_BIG * 1.35;
 
-  for (let i = 0; i < NUM; i++) {
-    const startAngle = rotation + i * ARC;
-    const endAngle   = startAngle + ARC;
-    const p = PRIZES[i];
+function drawWheel(rot) {
+  ctx.clearRect(0,0,SZ,SZ);
+
+  for (let i=0; i<N; i++) {
+    const sa = rot + i*ARC;
+    const ea = sa + ARC;
+    const p  = PRIZES[i];
 
     // Segment
     ctx.beginPath();
-    ctx.moveTo(CX, CY);
-    ctx.arc(CX, CY, R, startAngle, endAngle);
+    ctx.moveTo(CX,CY);
+    ctx.arc(CX,CY,R,sa,ea);
     ctx.closePath();
-    ctx.fillStyle = p.color;
+    ctx.fillStyle = p.seg;
     ctx.fill();
 
-    // Divider
-    ctx.strokeStyle = 'rgba(0,0,0,0.28)';
-    ctx.lineWidth = 2.5;
+    // Dividers — gold
+    ctx.strokeStyle = 'rgba(0,0,0,.22)';
+    ctx.lineWidth   = 2;
     ctx.stroke();
 
-    // ---- TEXT ----
+    // ── TEXT ──────────────────────────────────
     ctx.save();
-    ctx.translate(CX, CY);
-    // Rotate so we're pointing toward the middle of this segment
-    ctx.rotate(startAngle + ARC / 2);
-    // Right-align text so it ends near the rim
+    ctx.translate(CX,CY);
+    ctx.rotate(sa + ARC/2);  // point toward segment centre
     ctx.textAlign    = 'right';
     ctx.textBaseline = 'middle';
 
-    const lines    = p.labelLines;
-    const fsize    = Math.round(SIZE * 0.075);   // ~23px on 310px wheel
-    const lineH    = fsize * 1.3;
-    const totalH   = (lines.length - 1) * lineH;
+    const lines  = p.wheelLines;
+    const totalH = (lines.length-1) * LINE_H;
 
-    lines.forEach((line, li) => {
-      const y   = -totalH / 2 + li * lineH;
-      const x   = R - 14;
-      const big = (li === 0);
+    lines.forEach((line,li) => {
+      const isBig = (li===0);
+      const fs    = isBig ? FS_BIG : FS_SMALL;
+      const y     = -totalH/2 + li*LINE_H;
+      const x     = R*0.88;
 
-      ctx.font = `${big ? '800' : '600'} ${big ? fsize + 2 : fsize}px 'DM Sans', sans-serif`;
+      ctx.font = `${isBig?'800':'700'} ${fs}px 'DM Sans',sans-serif`;
 
-      // Dark outline for readability on any segment colour
+      // Thick dark outline for contrast on any segment colour
       ctx.lineJoin    = 'round';
-      ctx.lineWidth   = 5;
-      ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+      ctx.lineWidth   = 6;
+      ctx.strokeStyle = 'rgba(0,0,0,.55)';
       ctx.strokeText(line, x, y);
 
-      ctx.fillStyle = p.textColor;
+      // Fill
+      ctx.fillStyle = p.txt;
       ctx.fillText(line, x, y);
     });
 
@@ -329,181 +496,165 @@ function drawWheel(rotation) {
 
   // Gold rim
   ctx.beginPath();
-  ctx.arc(CX, CY, R - 1, 0, 2 * Math.PI);
-  ctx.strokeStyle = 'rgba(245,200,66,0.5)';
-  ctx.lineWidth = 3;
+  ctx.arc(CX,CY,R-1,0,2*Math.PI);
+  ctx.strokeStyle='rgba(245,200,66,.6)';
+  ctx.lineWidth=3;
   ctx.stroke();
+
+  // Inner shadow near centre
+  const ig=ctx.createRadialGradient(CX,CY,R*.5,CX,CY,R*.7);
+  ig.addColorStop(0,'rgba(0,0,0,.0)');
+  ig.addColorStop(1,'rgba(0,0,0,.12)');
+  ctx.beginPath();
+  ctx.arc(CX,CY,R,0,2*Math.PI);
+  ctx.fillStyle=ig;
+  ctx.fill();
 }
 
-// Initial rotation: segment-0 starts at 12 o'clock
-let currentRotation = -Math.PI / 2;
-drawWheel(currentRotation);
+// Start: segment 0 at 12 o'clock
+let rot = -Math.PI/2;
+drawWheel(rot);
 
-// ============================================================
-//  SPIN ANIMATION  — correct maths
-//
-//  The pointer is fixed at the TOP of the wheel (12 o'clock = -PI/2).
-//  Segment[i] occupies angles [rotation + i*ARC, rotation + (i+1)*ARC].
-//  Its CENTRE is at: rotation + i*ARC + ARC/2
-//
-//  We want: (currentRotation + delta) + prizeIndex*ARC + ARC/2 ≡ -PI/2  (mod 2PI)
-//  => delta = -PI/2 - currentRotation - prizeIndex*ARC - ARC/2
-//
-//  Normalise to [0, 2PI] so we always spin forward (clockwise).
-// ============================================================
+// ── SPIN ─────────────────────────────────────────────────────────
 let spinning = false;
 
-function spinToPrize(prizeIndex) {
+function spinTo(idx) {
   if (spinning) return;
   spinning = true;
   document.getElementById('spinBtn').disabled = true;
 
-  // How much MORE do we need to rotate?
-  let delta = (-Math.PI / 2) - currentRotation - prizeIndex * ARC - ARC / 2;
+  // Target: centre of prize segment under the pointer (top = -PI/2)
+  // Segment[idx] centre is at: rot + idx*ARC + ARC/2
+  // We need that ≡ -PI/2  (mod 2PI), spinning forward only.
+  let delta = (-Math.PI/2) - rot - idx*ARC - ARC/2;
+  // Normalise to (0, 2PI]
+  delta = ((delta % (2*Math.PI)) + 2*Math.PI) % (2*Math.PI);
+  if (delta < 0.05) delta += 2*Math.PI;
 
-  // Normalise to (0, 2PI]  — ensures forward spin
-  delta = ((delta % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-  if (delta < 0.05) delta += 2 * Math.PI; // never land "already there"
+  // 6–8 full extra spins
+  const extra = (6 + Math.floor(Math.random()*3)) * 2*Math.PI;
+  const total = extra + delta;
 
-  // Add 5–7 full extra rotations for drama
-  const extraSpins    = (5 + Math.floor(Math.random() * 3)) * 2 * Math.PI;
-  const totalRotation = extraSpins + delta;
+  const DUR = 5500, t0 = performance.now(), r0 = rot;
 
-  const DURATION = 5200; // ms
-  const startTime = performance.now();
-  const startRot  = currentRotation;
+  function ease(t){ return 1 - Math.pow(1-t, 3) }
 
-  function easeOut(t) {
-    return 1 - Math.pow(1 - t, 3); // cubic ease-out
-  }
-
-  function animate(now) {
-    const t = Math.min((now - startTime) / DURATION, 1);
-    currentRotation = startRot + totalRotation * easeOut(t);
-    drawWheel(currentRotation);
-    if (t < 1) {
-      requestAnimationFrame(animate);
-    } else {
-      currentRotation = (startRot + totalRotation) % (2 * Math.PI);
-      drawWheel(currentRotation);
+  function frame(now) {
+    const t = Math.min((now-t0)/DUR, 1);
+    rot = r0 + total*ease(t);
+    drawWheel(rot);
+    if (t<1) { requestAnimationFrame(frame); }
+    else {
+      rot = (r0+total) % (2*Math.PI);
+      drawWheel(rot);
       spinning = false;
-      onSpinComplete();
+      done();
     }
   }
-
-  requestAnimationFrame(animate);
+  requestAnimationFrame(frame);
 }
 
-// ============================================================
-//  AFTER SPIN
-// ============================================================
-function onSpinComplete() {
-  const prize  = window._pendingPrize;
-  const expiry = getExpiryString();
+// ── AFTER SPIN ───────────────────────────────────────────────────
+function done() {
+  const p = window._prize;
+  const exp = expiryStr();
   try {
-    localStorage.setItem('slc_spun',   'true');
-    localStorage.setItem('slc_prize',  String(prize.id));
-    localStorage.setItem('slc_expiry', expiry);
-  } catch(e) {}
-  try { gtag('event', 'prize_revealed', { prize_name: prize.name }); } catch(e) {}
-  showPrize(prize, expiry);
-  launchConfetti();
+    localStorage.setItem('slc_spun','true');
+    localStorage.setItem('slc_prize', String(p.id));
+    localStorage.setItem('slc_expiry', exp);
+  } catch(e){}
+  try{ gtag('event','prize_revealed',{prize_name:p.name}) }catch(e){}
+  showPrize(p, exp);
+  confetti();
 }
 
-function showPrize(prize, expiry) {
-  document.getElementById('wheelSection').style.display = 'none';
-  document.getElementById('alreadyBanner').classList.remove('visible');
+function showPrize(p, exp) {
+  document.getElementById('wheelArea').style.display = 'none';
+  document.getElementById('banner').classList.remove('show');
 
-  document.getElementById('prizeName').textContent   = prize.name;
-  document.getElementById('prizeDesc').textContent   = prize.desc;
-  document.getElementById('prizeExpiry').textContent = expiry;
+  document.getElementById('prizeEmoji').textContent   = p.emoji;
+  document.getElementById('prizeName').textContent    = p.name;
+  document.getElementById('prizeDesc').textContent    = p.desc;
+  document.getElementById('prizeExpiry').textContent  = exp;
 
-  const minEl = document.getElementById('prizeMinOrder');
-  if (prize.minOrder) {
-    minEl.textContent = `🛒 Minimum order: ₹${prize.minOrder}`;
-    minEl.style.display = 'inline-flex';
+  const mo = document.getElementById('prizeMinOrder');
+  if (p.minOrder) {
+    mo.textContent    = `🛒 Min. order: ₹${p.minOrder}`;
+    mo.style.display  = 'inline-flex';
   } else {
-    minEl.style.display = 'none';
+    mo.style.display  = 'none';
   }
 
-  const waText = encodeURIComponent(
-    `I just won ${prize.name} at Shadow Lights Café! 🎡\nTry your luck: shadowlightscafe.in/spin`
-  );
-  document.getElementById('whatsappShare').href = `https://wa.me/?text=${waText}`;
+  const waTxt = encodeURIComponent(`I just won ${p.emoji} ${p.name} at Shadow Lights Café! 🎡\nTry your luck: shadowlightscafe.in/spin`);
+  document.getElementById('waShare').href = `https://wa.me/?text=${waTxt}`;
 
-  document.getElementById('prizeScreen').classList.add('visible');
-  setTimeout(() => document.getElementById('prizeScreen').scrollIntoView({ behavior:'smooth', block:'start' }), 300);
+  document.getElementById('prizeScreen').classList.add('show');
+  setTimeout(()=>document.getElementById('prizeScreen').scrollIntoView({behavior:'smooth',block:'start'}),400);
 }
 
 // Spin button
-document.getElementById('spinBtn').addEventListener('click', () => {
-  const prize = pickPrize();
-  window._pendingPrize = prize;
-  try { gtag('event', 'wheel_spun'); } catch(e) {}
-  spinToPrize(prize.id);
+document.getElementById('spinBtn').addEventListener('click',()=>{
+  const p = pickPrize();
+  window._prize = p;
+  try{ gtag('event','wheel_spun') }catch(e){}
+  spinTo(p.id);
 });
 
-// Check localStorage on load
-(function() {
+// Check previous spin
+(function(){
   try {
     const spun = localStorage.getItem('slc_spun');
-    const pId  = localStorage.getItem('slc_prize');
+    const pid  = localStorage.getItem('slc_prize');
     const exp  = localStorage.getItem('slc_expiry');
-    if (spun === 'true' && pId !== null) {
-      const prize = PRIZES[parseInt(pId, 10)] || PRIZES[4];
-      document.getElementById('alreadyBanner').classList.add('visible');
+    if (spun==='true' && pid!==null) {
+      const p = PRIZES[parseInt(pid,10)] || PRIZES[4];
+      document.getElementById('banner').classList.add('show');
       document.getElementById('spinBtn').disabled = true;
-      showPrize(prize, exp || getExpiryString());
+      showPrize(p, exp||expiryStr());
     }
-  } catch(e) {}
+  } catch(e){}
 })();
 
-// ============================================================
-//  CONFETTI
-// ============================================================
-(function() {
-  const cc = document.getElementById('confettiCanvas');
-  const cx = cc.getContext('2d');
-  const COLS = ['#f5c842','#ff9a3c','#D4621A','#FFF0D0','#C4733C','#fff','#ffdd66'];
-  let pieces = [], aid = null;
+// ── CONFETTI ──────────────────────────────────────────────────────
+function confetti() {
+  const cc  = document.getElementById('confetti');
+  const cx  = cc.getContext('2d');
+  const COL = ['#f5c842','#ff9a3c','#D4621A','#FAE8B0','#C4733C','#ffffff','#ffdd55'];
+  let pts=[], aid=null;
 
-  function resize() { cc.width = window.innerWidth; cc.height = window.innerHeight; }
-  window.addEventListener('resize', resize);
-  resize();
+  function resize(){ cc.width=innerWidth; cc.height=innerHeight }
+  window.addEventListener('resize',resize); resize();
 
-  function make() {
-    pieces = Array.from({length:150}, () => ({
-      x: Math.random() * cc.width, y: Math.random() * cc.height - cc.height,
-      w: 6 + Math.random() * 9,    h: 10 + Math.random() * 6,
-      color: COLS[Math.floor(Math.random() * COLS.length)],
-      speed: 2 + Math.random() * 4, angle: Math.random() * Math.PI * 2,
-      spin: (Math.random() - .5) * .18, drift: (Math.random() - .5) * 1.5,
-      opacity: .75 + Math.random() * .25,
-    }));
-  }
+  pts = Array.from({length:160},()=>({
+    x: Math.random()*cc.width,
+    y: Math.random()*cc.height - cc.height,
+    w: 5+Math.random()*10, h: 9+Math.random()*7,
+    c: COL[Math.floor(Math.random()*COL.length)],
+    v: 2+Math.random()*4, a: Math.random()*Math.PI*2,
+    sp:(Math.random()-.5)*.18, dr:(Math.random()-.5)*1.5,
+    op:.7+Math.random()*.3,
+  }));
 
-  function draw() {
-    cx.clearRect(0, 0, cc.width, cc.height);
-    let alive = false;
-    pieces.forEach(p => {
-      if (p.y < cc.height + 20) alive = true;
-      p.y += p.speed; p.x += p.drift; p.angle += p.spin;
-      cx.save(); cx.globalAlpha = p.opacity;
-      cx.translate(p.x + p.w/2, p.y + p.h/2); cx.rotate(p.angle);
-      cx.fillStyle = p.color;
-      cx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+  function draw(){
+    cx.clearRect(0,0,cc.width,cc.height);
+    let alive=false;
+    pts.forEach(p=>{
+      if(p.y<cc.height+20) alive=true;
+      p.y+=p.v; p.x+=p.dr; p.a+=p.sp;
+      cx.save(); cx.globalAlpha=p.op;
+      cx.translate(p.x+p.w/2,p.y+p.h/2); cx.rotate(p.a);
+      cx.fillStyle=p.c;
+      cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
       cx.restore();
     });
-    if (alive) { aid = requestAnimationFrame(draw); }
-    else { cx.clearRect(0,0,cc.width,cc.height); aid = null; }
+    if(alive){ aid=requestAnimationFrame(draw) }
+    else{ cx.clearRect(0,0,cc.width,cc.height); aid=null }
   }
 
-  window.launchConfetti = function() {
-    if (aid) cancelAnimationFrame(aid);
-    make(); draw();
-    setTimeout(() => { if (aid) { cancelAnimationFrame(aid); cx.clearRect(0,0,cc.width,cc.height); aid = null; } }, 4500);
-  };
-})();
+  if(aid) cancelAnimationFrame(aid);
+  draw();
+  setTimeout(()=>{ if(aid){ cancelAnimationFrame(aid); cx.clearRect(0,0,cc.width,cc.height); aid=null } },5000);
+}
 </script>
 </body>
 </html>
