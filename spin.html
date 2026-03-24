@@ -235,7 +235,7 @@
 //  PRIZES — minOrder: minimum order in ₹ (null = no minimum)
 // ============================================================
 const PRIZES = [
-  { id:0, labelLines:['FREE','₹222','Combo'],  name:'FREE 179 Combo 🎁',        desc:'One free Combo Meal worth ₹179',        minOrder:199, color:'#E8A83E', textColor:'#2a1800' },
+  { id:0, labelLines:['FREE','₹179','Combo'],  name:'FREE 179 Combo 🎁',        desc:'One free Combo Meal worth ₹179',        minOrder:199, color:'#E8A83E', textColor:'#2a1800' },
   { id:1, labelLines:['FREE','Milkshake'],      name:'FREE Milkshake 🥛',          desc:'One free Milkshake with your order',     minOrder:149, color:'#C4733C', textColor:'#fff5ee' },
   { id:2, labelLines:['FREE','Mini Pops'],      name:'FREE Mini Pops 🍡',          desc:'3 pcs free with your order',            minOrder:99, color:'#D4621A', textColor:'#fff5ee' },
   { id:3, labelLines:['FREE','Mojito'],         name:'FREE Mojito 🍹',     desc:'Free Mojito with your order',      minOrder:149, color:'#F0C040', textColor:'#2a1800' },
@@ -244,10 +244,10 @@ const PRIZES = [
 
 function pickPrize() {
   const r = Math.floor(Math.random() * 100) + 1;
-  if (r <= 5)       return PRIZES[0];
-  else if (r <= 15) return PRIZES[1];
-  else if (r <= 45) return PRIZES[2];
-  else if (r <= 75) return PRIZES[3];
+  if (r <= 50)       return PRIZES[0];
+  else if (r <= 60) return PRIZES[1];
+  else if (r <= 75) return PRIZES[2];
+  else if (r <= 85) return PRIZES[3];
   else              return PRIZES[4];
 }
 
