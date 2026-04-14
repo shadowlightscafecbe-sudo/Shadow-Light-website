@@ -15,7 +15,7 @@ const MENU_ITEMS = [
   { name: 'Bubble Waffle — Belgian Milk Chocolate', emoji: '🧇', desc: 'CBE\'s first bubble waffle! Crispy Hong Kong-style egg waffle with Belgian milk chocolate.', price: '₹220', cat: 'signatures', badge: 'first' },
   { name: 'Bubble Waffle — Triple Chocolate', emoji: '🧇', desc: 'Three layers of chocolate bliss in our signature bubble waffle. Add ice cream for ₹40 more.', price: '₹250', cat: 'signatures', badge: 'first' },
   { name: 'Bubble Waffle — Hazelnut', emoji: '🧇', desc: 'Bubble waffle loaded with rich hazelnut spread. A crowd favourite. Add ice cream for ₹40.', price: '₹250', cat: 'signatures', badge: 'first' },
-  { name: 'Ice Cream Mini Pops Platter', emoji: '🍦', desc: 'CBE\'s first ice pops — five delightful varieties on one platter. Perfect for sharing!', price: '₹100', cat: 'signatures', badge: 'first' },
+  { name: 'Ice Cream Mini Pops Platter', emoji: '🍦', desc: 'CBE\'s first mini pops — five delightful varieties on one platter. Perfect for sharing!', price: '₹100', cat: 'signatures', badge: 'first' },
   { name: 'SL Special Chicken Pizza', emoji: '🍕', desc: 'Shadow Lights\' very own special chicken pizza — the most popular pizza on our menu.', price: '₹280', cat: 'signatures', badge: 'popular' },
   { name: 'Chicken Pearls', emoji: '🍗', desc: 'Our special fried chicken in bite-sized pearl form. Crispy outside, juicy inside.', price: '₹190', cat: 'signatures', badge: 'popular' },
 
