@@ -22,6 +22,8 @@
   <meta name="author" content="Shadow Lights Cafe" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://shadowlightscafe.in/" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon.png" /> 
 
   <!-- Open Graph (Social Sharing) -->
   <meta property="og:title" content="Shadow Lights Cafe | Best Cafe in Coimbatore" />
@@ -69,9 +71,9 @@
   <header class="header" id="header">
     <nav class="nav container" aria-label="Main navigation">
       <a href="#" class="nav__logo" aria-label="Shadow Lights Cafe Home">
-        <span class="logo-icon">☽</span>
-        <span class="logo-text">Shadow Lights Cafe</span>
-      </a>
+  <img src="images/logo.png" alt="Shadow Lights Cafe" class="logo-img" />
+  <span class="logo-text">Shadow Lights Cafe</span>
+</a>
       <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -201,19 +203,25 @@
         </div>
         <div class="firsts__grid">
           <article class="first-card" aria-label="mini pops">
-            <div class="first-card__icon" aria-hidden="true">🍦</div>
+            <div class="first-card__img">
+              <img src="images/minipops.webp" alt="Mini Pops" loading="lazy" />
+            </div>
             <div class="first-card__badge">#1 in CBE</div>
             <h3 class="first-card__title">Mini pops - 10 Varieties</h3>
             <p class="first-card__desc">Coimbatore's first handcrafted mini pops — refreshing, beautiful, and made fresh daily in flavours you've never seen before.</p>
           </article>
           <article class="first-card first-card--featured" aria-label="Bubble Waffles">
-            <div class="first-card__icon" aria-hidden="true">🧇</div>
-            <div class="first-card__badge">#1 in CBE</div>
+          <div class="first-card__img">
+            <img src="images/bubblewaffles.webp" alt="Bubble waffles" loading="lazy" />
+          </div>            
+          <div class="first-card__badge">#1 in CBE</div>
             <h3 class="first-card__title">Bubble Waffles</h3>
             <p class="first-card__desc">Hong Kong-style egg waffles with crispy-outside, soft-inside bubbles. We brought this viral sensation to Coimbatore first.</p>
           </article>
           <article class="first-card" aria-label="Sealed Burgers">
-            <div class="first-card__icon" aria-hidden="true">🍔</div>
+            <div class="first-card__img">
+            <img src="images/sealedburger.webp" alt="Sealed burger" loading="lazy" />
+            </div>
             <div class="first-card__badge">#1 in CBE</div>
             <h3 class="first-card__title">Sealed Burgers</h3>
             <p class="first-card__desc">The smash-burger evolution — a sealed, pressed patty burger that locks in all the juicy, smoky, unforgettable flavour.</p>
@@ -450,8 +458,9 @@
     <div class="container">
       <div class="footer__grid">
         <div class="footer__brand">
-          <span class="logo-icon">☽</span>
-          <span class="logo-text">Shadow Lights</span>
+          <img src="images/logo.png" alt="Shadow Lights Cafe" class="logo-img logo-img--footer" />         
+          <span class="logo-text">Shadow Lights Cafe</span>
+          <em style="color: chartreuse;">Love the Shadow, flavour the light.</em>
           <p>Coimbatore's most unique cafe experience. First in mini pops, Bubble Waffles & Sealed Burgers.</p>
         </div>
         <nav class="footer__links" aria-label="Footer navigation">
@@ -478,7 +487,7 @@
       </div>
       <div class="footer__bottom">
         <p>© 2025 Shadow Lights Cafe, Coimbatore. All rights reserved.</p>
-        <p>Made with ❤️ in Coimbatore</p>
+        <p>Made by <a href="https://www.digizionmedia.in/">DigizionMedia</a> in Coimbatore</p>
       </div>
     </div>
   </footer>
